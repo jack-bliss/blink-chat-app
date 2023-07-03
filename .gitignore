@@ -1,0 +1,7 @@
+node_modules
+cdk.out
+.DS_Store
+.vscode
+dist
+bucket/bundles
+ec2-fleet-launch-bucket
