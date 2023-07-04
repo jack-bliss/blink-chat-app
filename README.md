@@ -1,4 +1,8 @@
-# Template
+# Blink Chat App
+
+* Deployed to a lambda function
+* State is stored in S3
+* https://blinkchatapp.jackbliss.co.uk/
 
 ## Local dev
 
@@ -8,7 +12,7 @@
 
 ## ./bucket and client bundles
 
-* The `./bucket` directory is automatically uplaoded to the generated S3 bucket on infra deploy
+* The `./bucket` directory is automatically uploaded to the generated S3 bucket on infra deploy
 * Existing objects in the S3 bucket but not in ./bucket are NOT deleted (aka pruned), but they are overwritten if necessary
 * [infra/bundle.ts](infra/bundle.ts) generates bundled files to the bucket directory in `./bucket/bundles`
   * Bundles are gitignored so must be generated as part of deploying (automatically happens as part of `npm run infra:deploy`)

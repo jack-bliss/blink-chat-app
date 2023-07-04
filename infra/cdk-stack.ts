@@ -39,10 +39,7 @@ export class CdkStack extends Stack {
 
     new CfnOutput(this, `AssetsBucketName`, { value: bucket.bucketName });
     new CfnOutput(this, `LambdaPublicUrl`, {
-      value: `https://lambda-${appDomainName}`,
-    });
-    new CfnOutput(this, `ServerPublicUrl`, {
-      value: `https://server-${appDomainName}`,
+      value: `https://${appDomainName}`,
     });
     new CfnOutput(this, `LambdaDistributionID`, {
       value: lambdaDistribution.distributionId,
@@ -52,9 +49,3 @@ export class CdkStack extends Stack {
     });
   }
 }
-
-/*
-AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-AWS_DEFAULT_REGION: 'eu-west-2'
-*/
