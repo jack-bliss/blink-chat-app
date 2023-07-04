@@ -1,0 +1,24 @@
+.conversation-detail {
+  height: 100%;
+  overflow: auto;
+  margin: 0;
+  padding: 20px;
+  border-bottom: 1px solid white;
+}
+
+.conversation-input {
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.conversation-input .text-input {
+  display: block;
+}
+
+.conversation-input input[type=submit] {
+  padding: 3px 40px;
+}

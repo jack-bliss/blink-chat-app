@@ -1,4 +1,4 @@
-export const PROJECT_NAME = 'Template';
+export const PROJECT_NAME = 'BlinkChatApp';
 export const PORT = 3000;
 
 export const DOMAIN = 'jackbliss.co.uk';

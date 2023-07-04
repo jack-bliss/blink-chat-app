@@ -1,23 +1,7 @@
-import {
-  Fn,
-  App,
-  Stack,
-  StackProps,
-  CfnOutput,
-  aws_s3,
-  aws_s3_deployment,
-} from 'aws-cdk-lib';
-import { Source } from 'aws-cdk-lib/aws-s3-deployment';
-import { join } from 'path';
-import { createNodejsFunction } from './resources/lambda';
-import { createDistribution } from './resources/cloudfront';
-import { createARecord } from './resources/route-53';
-import { createBucket } from './resources/s3';
+import { App, Stack, StackProps, CfnOutput } from 'aws-cdk-lib';
 import { projectNameToSubdomain } from './helpers/project-name-to-subdomain';
 import { BaseRegion } from './base-region';
-import { createEc2Fleet } from './resources/ec2-fleet';
 import { httpLambdaService } from './coordinated/http-lambda-service';
-import { httpEc2Service } from './coordinated/http-ec2-service';
 
 type RoutingProps = {
   usCertificateArn: string;
@@ -47,25 +31,10 @@ export class CdkStack extends Stack {
       scope: this,
       stackName,
       id: 'HttpService',
-      appDomainName: `lambda-${appDomainName}`,
+      appDomainName: appDomainName,
       hostedZoneId: routingProps.hostedZoneId,
       certificateArn: routingProps.usCertificateArn,
       domain: routingProps.domain,
-    });
-
-    const {
-      autoScalingGroup,
-      distribution: serverDistribution,
-      launchBucketName,
-    } = httpEc2Service({
-      scope: this,
-      id: 'TestFleet',
-      appDomainName: `server-${appDomainName}`,
-      hostedZoneId: routingProps.hostedZoneId,
-      usCertificateArn: routingProps.usCertificateArn,
-      stackName,
-      domain: routingProps.domain,
-      assetBucket: bucket,
     });
 
     new CfnOutput(this, `AssetsBucketName`, { value: bucket.bucketName });
@@ -78,17 +47,8 @@ export class CdkStack extends Stack {
     new CfnOutput(this, `LambdaDistributionID`, {
       value: lambdaDistribution.distributionId,
     });
-    new CfnOutput(this, `ServerDistributionID`, {
-      value: serverDistribution.distributionId,
-    });
     new CfnOutput(this, `LambdaLogGroupUrl`, {
       value: `https://eu-west-2.console.aws.amazon.com/cloudwatch/home?region=${BaseRegion}#logsV2:log-groups/log-group/$252Faws$252Flambda$252F${nodejsFunction.functionName}`,
-    });
-    new CfnOutput(this, `AutoScalingGroupName`, {
-      value: autoScalingGroup.autoScalingGroupName,
-    });
-    new CfnOutput(this, `TestFleetLaunchBucketName`, {
-      value: launchBucketName,
     });
   }
 }

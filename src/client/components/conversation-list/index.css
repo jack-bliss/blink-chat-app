@@ -1,0 +1,14 @@
+.conversation-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  border-right: 1px solid white;
+  height: 100%;
+  overflow: auto;
+  grid-row: 1 / -1;
+}
+
+.conversation-list a {
+  color: white;
+}

@@ -26,7 +26,7 @@ export async function handleError(
       error,
     });
   }
-  return res.send({
+  return res.status(400).send({
     timestamp,
     path: req.path,
     message: error.message,

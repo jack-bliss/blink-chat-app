@@ -1,0 +1,14 @@
+.message {
+  margin-bottom: 30px;
+}
+
+.message h4 {
+  font-size: 12px;
+  font-weight: normal;
+  margin: 0;
+}
+
+.message p {
+  margin: 0;
+  font-size: 18px;
+}
